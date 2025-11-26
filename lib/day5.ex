@@ -72,7 +72,26 @@ defmodule Day5 do
     |> Enum.sum()
   end
 
-  def correct_page_order(_page, _page_ordering) do
-    [""]
+  def correct_page_order(page, page_ordering) do
+    if length(page) < 2 do
+      page
+    else
+      [first | rest] = page
+
+      errors =
+        Enum.filter(page_ordering, fn [_, second] -> second == first end)
+        |> Enum.map(fn [x, _y] ->
+          x
+        end)
+        |> Enum.filter(fn x ->
+          Enum.member?(rest, x)
+        end)
+
+      if(length(errors) > 0) do
+        correct_page_order(errors ++ (page -- errors), page_ordering)
+      else
+        [first] ++ correct_page_order(rest, page_ordering)
+      end
+    end
   end
 end

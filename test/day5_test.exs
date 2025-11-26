@@ -7,6 +7,6 @@ defmodule Day5Test do
   end
 
   test "day5part2" do
-    assert Day4.part2("input/day5-example") == 9
+    assert Day4.part2("input/day5-example") == 123
   end
 end
