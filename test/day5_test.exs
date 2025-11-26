@@ -3,10 +3,10 @@ defmodule Day5Test do
   doctest Day5
 
   test "day5part1" do
-    assert Day4.part1("input/day5-example") == 143
+    assert Day5.part1("input/day5-example") == 143
   end
 
   test "day5part2" do
-    assert Day4.part2("input/day5-example") == 123
+    assert Day5.part2("input/day5-example") == 123
   end
 end
