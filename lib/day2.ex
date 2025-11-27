@@ -16,7 +16,7 @@ defmodule Day2 do
 
     reports
     |> Enum.count(fn line ->
-      is_safe_increasing?(line) || is_safe_decreasing?(line)
+      is_safe_increasing?(line) or is_safe_decreasing?(line)
     end)
   end
 
@@ -27,7 +27,7 @@ defmodule Day2 do
       [first | queue] = report
       second = List.first(queue)
 
-      if(second - first < 1 || second - first > 3) do
+      if(second - first < 1 or second - first > 3) do
         false
       else
         is_safe_increasing?(queue)
@@ -42,7 +42,7 @@ defmodule Day2 do
       [first | queue] = report
       second = List.first(queue)
 
-      if(first - second < 1 || first - second > 3) do
+      if(first - second < 1 or first - second > 3) do
         false
       else
         is_safe_decreasing?(queue)
@@ -67,8 +67,8 @@ defmodule Day2 do
 
     reports
     |> Enum.count(fn line ->
-      is_safe_increasing?(line) ||
-        is_safe_decreasing?(line) ||
+      is_safe_increasing?(line) or
+        is_safe_decreasing?(line) or
         is_safe_with_dampener?(line)
     end)
   end
@@ -77,7 +77,7 @@ defmodule Day2 do
     count =
       remove_each(report)
       |> Enum.filter(fn line ->
-        is_safe_increasing?(line) ||
+        is_safe_increasing?(line) or
           is_safe_decreasing?(line)
       end)
       |> Enum.count()

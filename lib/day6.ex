@@ -98,12 +98,17 @@ defmodule Day6 do
 
     original_path = move(grid, start_x, start_y) |> MapSet.new()
 
+    IO.puts("Nombre de positions à tester: #{MapSet.size(original_path) - 1}")
+    IO.puts("Nombre de cœurs CPU: #{System.schedulers_online()}")
+
     original_path
     |> MapSet.delete({start_x, start_y})
     |> Task.async_stream(
       fn {x, y} ->
         new_grid = Map.put(grid, {x, y}, "#")
-        move_with_memory(new_grid, start_x, start_y, :top, MapSet.new())
+        result = move_with_memory(new_grid, start_x, start_y, :top, MapSet.new())
+        IO.write(".")
+        result
       end,
       max_concurrency: System.schedulers_online()
     )

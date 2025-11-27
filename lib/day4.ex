@@ -94,7 +94,7 @@ defmodule Day4 do
 
     positions_of_a
     |> Enum.filter(fn {x, y} ->
-      x != 0 && x != width && y != 0 && y != height
+      x != 0 and x != width and y != 0 and y != height
     end)
     |> Enum.filter(fn {x, y} ->
       ul = if is_mas_up_left_diagonal(grid, x, y), do: 1, else: 0
@@ -133,18 +133,18 @@ defmodule Day4 do
   end
 
   defp is_mas_up_right_diagonal(grid, x, y) do
-    grid[{x - 1, y + 1}] == "M" && grid[{x + 1, y - 1}] == "S"
+    grid[{x - 1, y + 1}] == "M" and grid[{x + 1, y - 1}] == "S"
   end
 
   defp is_mas_down_right_diagonal(grid, x, y) do
-    grid[{x - 1, y - 1}] == "M" && grid[{x + 1, y + 1}] == "S"
+    grid[{x - 1, y - 1}] == "M" and grid[{x + 1, y + 1}] == "S"
   end
 
   defp is_mas_up_left_diagonal(grid, x, y) do
-    grid[{x + 1, y + 1}] == "M" && grid[{x - 1, y - 1}] == "S"
+    grid[{x + 1, y + 1}] == "M" and grid[{x - 1, y - 1}] == "S"
   end
 
   defp is_mas_down_left_diagonal(grid, x, y) do
-    grid[{x + 1, y - 1}] == "M" && grid[{x - 1, y + 1}] == "S"
+    grid[{x + 1, y - 1}] == "M" and grid[{x - 1, y + 1}] == "S"
   end
 end
