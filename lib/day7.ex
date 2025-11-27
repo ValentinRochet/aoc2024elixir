@@ -12,7 +12,7 @@ defmodule Day7 do
       [start | rest] = numbers
       can_combine?(start, rest, result)
     end)
-    |> Enum.map(fn {result, _numbers} -> String.to_integer(result) end)
+    |> Enum.map(fn {result, _numbers} -> result end)
     |> Enum.sum()
   end
 
@@ -58,7 +58,29 @@ defmodule Day7 do
   ##
   ## part 2
   ##
-  def part2(file \\ "input/7-input") do
-    _input = File.read!(file)
+  def part2(file \\ "input/day7-input") do
+    file
+    |> File.read!()
+    |> String.split("\r\n", trim: true)
+    |> Stream.map(&parse_line/1)
+    |> Stream.filter(fn {result, [start | rest]} ->
+      can_combine_part_2?(start, rest, result)
+    end)
+    |> Stream.map(fn {result, _numbers} -> result end)
+    |> Enum.sum()
+  end
+
+  defp can_combine_part_2?(current, [], expected), do: current == expected
+
+  defp can_combine_part_2?(current, _, expected) when current > expected, do: false
+
+  defp can_combine_part_2?(current_total, [next | rest], expected) do
+    can_combine_part_2?(current_total + next, rest, expected) or
+      can_combine_part_2?(current_total * next, rest, expected) or
+      can_combine_part_2?(
+        Integer.undigits(Integer.digits(current_total) ++ Integer.digits(next)),
+        rest,
+        expected
+      )
   end
 end
