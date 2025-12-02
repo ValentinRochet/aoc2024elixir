@@ -1,8 +1,7 @@
 {
   // Associer les fichiers sans extension dans input/ comme du texte brut
   "files.associations": {
-    "input/day*-input": "plaintext",
-    "input/day*-example": "plaintext"
+    "input/day*": "plaintext"
   },
 
   // Configuration spécifique pour les fichiers dans input/
